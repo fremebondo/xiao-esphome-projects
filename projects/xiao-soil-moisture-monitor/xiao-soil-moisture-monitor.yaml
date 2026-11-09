@@ -338,6 +338,17 @@ sensor:
   - platform: wifi_signal
     name: "wifi signal strength"
     update_interval: 10s
+
+  - platform: template
+    name: "Soil Moisture Percentage"
+    id: soil_moisture_percentage
+    lambda: |-
+      float value = id(soil_sensor).state;
+      float Diff = id(dry_value) - id(wet_value);
+      return (id(dry_value)-id(soil_sensor).state)/Diff;
+    unit_of_measurement: "%"
+    update_interval: never  
+
     
 # text_sensor:
 #   - platform: template
